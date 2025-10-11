@@ -4,30 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Normalisasi</title>
-  <link rel="stylesheet" href="../style.css?v=2">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: linear-gradient(180deg, #4f46e5, #7e22ce); color: #fff; line-height: 1.6; }
+    header { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    header h1 { font-size: 22px; }
+    nav a { color: #fff; text-decoration: none; margin-left: 20px; transition: .3s; }
+    nav a:hover { color: #c084fc; }
+    section { max-width: 800px; margin: auto; padding: 70px 20px; }
+    .hero { text-align: center; margin-bottom: 30px; }
+    .hero h2 { font-size: 32px; margin-bottom: 10px; }
+    .hero p { color: #e9d5ff; }
+    .about { background: rgba(255,255,255,0.15); border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .about h3 { border-left: 5px solid #c084fc; padding-left: 12px; margin-bottom: 15px; font-size: 22px; }
+    .about li { margin-bottom: 10px; }
+    footer { text-align: center; padding: 15px; background: rgba(0,0,0,0.25); color: #ccc; margin-top: 40px; }
+  </style>
 </head>
 <body>
-<header>
-  <h1>Basis Data</h1>
-  <nav><a href="../index.html">Beranda</a></nav>
-</header>
+  <header>
+    <h1>Basis Data</h1>
+    <nav><a href="index.html">Beranda</a></nav>
+  </header>
 
-<section class="hero">
-  <h2>Normalisasi</h2>
-  <p>Normalisasi adalah proses untuk mengorganisasi data agar tidak terjadi redundansi (pengulangan) dan inkonsistensi data.</p>
-</section>
+  <section class="hero">
+    <h2>Normalisasi</h2>
+    <p>Normalisasi adalah proses merancang tabel untuk mengurangi duplikasi dan menjaga konsistensi data.</p>
+  </section>
 
-<section class="about">
-  <h3>Tahapan Normalisasi</h3>
-  <ul>
-    <li><b>1NF:</b> Setiap kolom berisi nilai atomik.</li>
-    <li><b>2NF:</b> Tidak ada ketergantungan parsial.</li>
-    <li><b>3NF:</b> Tidak ada ketergantungan transitif.</li>
-  </ul>
-</section>
+  <section class="about">
+    <h3>Tahapan Normalisasi</h3>
+    <ul>
+      <li><b>1NF:</b> Setiap kolom berisi nilai tunggal.</li>
+      <li><b>2NF:</b> Tidak ada ketergantungan parsial terhadap primary key.</li>
+      <li><b>3NF:</b> Tidak ada ketergantungan antar atribut non-key.</li>
+    </ul>
+  </section>
 
-<footer>
-  &copy; 2025 Sandy — Website Basis Data
-</footer>
+  <footer>&copy; 2025 Sandy — Website Basis Data</footer>
 </body>
 </html>
