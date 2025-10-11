@@ -4,56 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bahasa SQL Dasar</title>
-  <link rel="stylesheet" href="style.css?v=2">
-<link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="../style.css?v=2">
 </head>
 <body>
-  <header>
-    <h1>Bahasa SQL Dasar</h1>
-    <nav>
-      <a href="../index.html">Beranda</a>
-      <a href="materi.html">Materi</a>
-      <a href="tugas.html">Tugas</a>
-      <a href="kontak.html">Kontak</a>
-    </nav>
-  </header>
+<header>
+  <h1>Basis Data</h1>
+  <nav><a href="../index.html">Beranda</a></nav>
+</header>
 
-  <section>
-    <h2>Pengenalan SQL</h2>
-    <p>SQL (Structured Query Language) adalah bahasa standar untuk mengelola dan memanipulasi data pada sistem basis data relasional.</p>
+<section class="hero">
+  <h2>Bahasa SQL Dasar</h2>
+  <p>SQL (Structured Query Language) digunakan untuk mengakses dan mengelola data dalam sistem database relasional.</p>
+</section>
 
-    <h3>Perintah Dasar SQL:</h3>
-    <pre style="background:#1e1b4b;padding:10px;border-radius:8px;">
--- Membuat tabel
-CREATE TABLE Mahasiswa (
-  NIM CHAR(10) PRIMARY KEY,
-  Nama VARCHAR(50),
-  Jurusan VARCHAR(30)
-);
+<section class="about">
+  <h3>Perintah Dasar SQL</h3>
+  <ul>
+    <li><code>SELECT</code> — Menampilkan data</li>
+    <li><code>INSERT</code> — Menambah data</li>
+    <li><code>UPDATE</code> — Mengubah data</li>
+    <li><code>DELETE</code> — Menghapus data</li>
+  </ul>
+</section>
 
--- Menambah data
-INSERT INTO Mahasiswa VALUES ('2401010001','Sandy Tirta','Informatika');
-
--- Menampilkan data
-SELECT * FROM Mahasiswa;
-
--- Mengubah data
-UPDATE Mahasiswa SET Nama='Sandy T.' WHERE NIM='2401010001';
-
--- Menghapus data
-DELETE FROM Mahasiswa WHERE NIM='2401010001';
-    </pre>
-  </section>
-
-  <div style="text-align:center;margin-bottom:40px;">
-    <a href="post5.html" style="color:#c084fc;">⬅ Sebelumnya</a> |
-    <a href="post7.html" style="color:#c084fc;">Berikutnya ➡</a>
-  </div>
-
-  <footer>
-    © <span id="year"></span> Sandy — Basis Data
-  </footer>
-  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<footer>
+  &copy; 2025 Sandy — Website Basis Data
+</footer>
 </body>
 </html>
-
