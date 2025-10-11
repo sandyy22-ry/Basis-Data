@@ -4,29 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DDL & DML</title>
-  <link rel="stylesheet" href="../style.css?v=2">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: linear-gradient(180deg, #4f46e5, #7e22ce); color: #fff; line-height: 1.6; }
+    header { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    header h1 { font-size: 22px; }
+    nav a { color: #fff; text-decoration: none; margin-left: 20px; transition: .3s; }
+    nav a:hover { color: #c084fc; }
+    section { max-width: 800px; margin: auto; padding: 70px 20px; }
+    .hero { text-align: center; margin-bottom: 30px; }
+    .hero h2 { font-size: 32px; margin-bottom: 10px; }
+    .hero p { color: #e9d5ff; }
+    .about { background: rgba(255,255,255,0.15); border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .about h3 { border-left: 5px solid #c084fc; padding-left: 12px; margin-bottom: 15px; font-size: 22px; }
+    .about li { margin-bottom: 10px; }
+    code { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 5px; }
+    footer { text-align: center; padding: 15px; background: rgba(0,0,0,0.25); color: #ccc; margin-top: 40px; }
+  </style>
 </head>
 <body>
-<header>
-  <h1>Basis Data</h1>
-  <nav><a href="../index.html">Beranda</a></nav>
-</header>
+  <header>
+    <h1>Basis Data</h1>
+    <nav><a href="index.html">Beranda</a></nav>
+  </header>
 
-<section class="hero">
-  <h2>DDL & DML</h2>
-  <p>Dalam SQL, terdapat dua kelompok utama perintah yaitu DDL dan DML.</p>
-</section>
+  <section class="hero">
+    <h2>DDL & DML</h2>
+    <p>DDL dan DML adalah dua kelompok perintah utama SQL yang digunakan dalam pengelolaan data dan struktur basis data.</p>
+  </section>
 
-<section class="about">
-  <h3>Perbedaan DDL dan DML</h3>
-  <ul>
-    <li><b>DDL (Data Definition Language):</b> Digunakan untuk membuat dan mengubah struktur tabel. Contoh: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>.</li>
-    <li><b>DML (Data Manipulation Language):</b> Digunakan untuk memanipulasi isi tabel. Contoh: <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.</li>
-  </ul>
-</section>
+  <section class="about">
+    <h3>Perbedaan DDL dan DML</h3>
+    <ul>
+      <li>
+        <b>DDL (Data Definition Language):</b> digunakan untuk membuat dan mengubah struktur tabel.
+        <br>Contoh: <code>CREATE TABLE</code>, <code>ALTER TABLE</code>, <code>DROP TABLE</code>.
+      </li>
+      <li>
+        <b>DML (Data Manipulation Language):</b> digunakan untuk memanipulasi isi tabel.
+        <br>Contoh: <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.
+      </li>
+    </ul>
+  </section>
 
-<footer>
-  &copy; 2025 Sandy — Website Basis Data
-</footer>
+  <footer>&copy; 2025 Sandy — Website Basis Data</footer>
 </body>
 </html>
