@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studi Kasus Database Kampus</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Studi Kasus Database Kampus</h1>
+    <nav>
+      <a href="../index.html">Beranda</a>
+      <a href="materi.html">Materi</a>
+      <a href="tugas.html">Tugas</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Contoh Kasus</h2>
+    <p>Pada sistem kampus, data mahasiswa, dosen, dan mata kuliah perlu diatur dalam database yang saling terhubung.</p>
+
+    <h3>Contoh Struktur Tabel:</h3>
+    <pre style="background:#1e1b4b;padding:10px;border-radius:8px;">
+CREATE TABLE Mahasiswa (
+  NIM CHAR(10) PRIMARY KEY,
+  Nama VARCHAR(50),
+  Jurusan VARCHAR(30)
+);
+
+CREATE TABLE Dosen (
+  NIP CHAR(10) PRIMARY KEY,
+  Nama VARCHAR(50)
+);
+
+CREATE TABLE MataKuliah (
+  KodeMK CHAR(6) PRIMARY KEY,
+  NamaMK VARCHAR(50),
+  SKS INT
+);
+    </pre>
+
+    <p>Setiap tabel dapat dihubungkan melalui relasi seperti “Mahasiswa mengambil MataKuliah” untuk membentuk sistem akademik sederhana.</p>
+  </section>
+
+  <div style="text-align:center;margin-bottom:40px;">
+    <a href="post7.html" style="color:#c084fc;">⬅ Sebelumnya</a> |
+    <a href="../index.html" style="color:#c084fc;">🏠 Kembali ke Beranda</a>
+  </div>
+
+  <footer>
+    © <span id="year"></span> Sandy — Basis Data
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
 
