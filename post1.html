@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi Basis Data</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Materi</h1>
+    <nav>
+      <a href="../index.html">Beranda</a>
+      <a href="materi.html">Materi</a>
+      <a href="tugas.html">Tugas</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Materi Dasar Basis Data</h2>
+    <p>Basis data adalah kumpulan data yang saling berhubungan dan tersimpan secara terstruktur dalam sistem komputer.</p>
+    <ul>
+      <li>Database: tempat penyimpanan data.</li>
+      <li>Tabel: struktur yang berisi data.</li>
+      <li>Primary Key: penanda unik untuk tiap data.</li>
+      <li>Relasi: hubungan antara tabel.</li>
+    </ul>
+
+    <h3 style="margin-top:15px;">Contoh Query:</h3>
+    <pre style="background:#1e1b4b;padding:10px;border-radius:8px;">
+CREATE TABLE Mahasiswa (
+  NIM CHAR(10) PRIMARY KEY,
+  Nama VARCHAR(50),
+  Jurusan VARCHAR(30)
+);
+
+INSERT INTO Mahasiswa VALUES ('2401010001','Sandy Tirta','Informatika');
+    </pre>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Sandy — Materi Basis Data
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
