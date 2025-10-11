@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entity Relationship Diagram (ERD)</title>
+  <title>Entitas, Atribut, dan Relasi dalam ERD</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body { background: linear-gradient(180deg, #4f46e5, #7e22ce); color: #fff; line-height: 1.6; }
@@ -28,16 +28,97 @@
   </header>
 
   <section class="hero">
-    <h2>Entity Relationship Diagram (ERD)</h2>
-    <p>ERD digunakan untuk memodelkan hubungan antar entitas dalam sistem basis data.</p>
+    <h2>Entitas, Atribut, dan Relasi dalam ERD (ERD)</h2>
+    <p>Entitas, Atribut, dan Relasi dalam ERD</p>
   </section>
 
   <section class="about">
-    <h3>Komponen ERD</h3>
+    <h3>Entitas</h3>
     <ul>
-      <li><b>Entity:</b> Objek nyata seperti Mahasiswa, Dosen, Mata Kuliah.</li>
-      <li><b>Attribute:</b> Ciri-ciri dari entitas, seperti NIM, Nama, Alamat.</li>
-      <li><b>Relationship:</b> Hubungan antar entitas, seperti Mahasiswa mengambil Mata Kuliah.</li>
+      <li><b>ntitas adalah objek nyata atau konseptual yang memiliki data yang akan disimpan dalam sistem.
+Entitas biasanya direpresentasikan sebagai kotak (rectangle) dalam ERD.
+
+Contohnya dalam Sistem Akademik:
+
+Mahasiswa → menyimpan data tentang mahasiswa.
+
+Dosen → menyimpan data tentang pengajar.
+
+Mata Kuliah → menyimpan data tentang pelajaran.
+
+KRS (Kartu Rencana Studi) → menyimpan data pengambilan mata kuliah oleh mahasiswa.</li>
+      <h3>Atribut</h3>
+      <li>Atribut adalah karakteristik atau informasi yang menjelaskan suatu entitas.
+Atribut digambarkan dengan elips (oval) yang dihubungkan ke entitas.</li>
+      <li>Contoh Atribut
+
+Entitas Mahasiswa memiliki atribut:
+
+NIM (Nomor Induk Mahasiswa) → Primary Key
+
+Nama
+
+Tanggal_Lahir
+
+Alamat
+
+Jurusan
+
+Entitas Dosen memiliki atribut:
+
+NIP (Nomor Induk Pegawai) → Primary Key
+
+Nama_Dosen
+
+Jabatan
+
+No_Telepon</li>
+      <li>Jenis Atribut
+
+Atribut Kunci (Key Attribute):
+
+Unik, digunakan sebagai Primary Key (misal: NIM).
+
+Atribut Sederhana (Simple Attribute):
+
+Tidak dapat dipecah lagi (misal: Nama).
+
+Atribut Gabungan (Composite Attribute):
+
+Bisa dipecah menjadi bagian lebih kecil (misal: Alamat → Jalan, Kota, KodePos).
+
+Atribut Turunan (Derived Attribute):
+
+Nilainya berasal dari atribut lain (misal: Umur dari Tanggal_Lahir).
+
+Atribut Multivalued:
+
+Bisa memiliki banyak nilai (misal: Nomor_Telepon).</li>
+      <h3>Relasi</h3>
+      <li>Relasi menunjukkan hubungan antar entitas.
+Dalam ERD, relasi digambarkan dengan belah ketupat (diamond) yang menghubungkan dua atau lebih entitas.</li>
+      <li>Contoh Relasi
+
+Mahasiswa mengambil Mata Kuliah
+
+Dosen mengajar Mata Kuliah
+
+Artinya:
+
+Satu mahasiswa dapat mengambil banyak mata kuliah.
+
+Satu dosen dapat mengajar lebih dari satu mata kuliah.</li>
+      <li>Kardinalitas menunjukkan jumlah hubungan antar entitas.
+Ada tiga jenis utama:
+
+Jenis Kardinalitas	Arti	Contoh
+One to One (1:1)	Satu entitas A berhubungan dengan satu entitas B	Satu Kepala Jurusan ↔ Satu Jurusan
+One to Many (1:N)	Satu entitas A bisa berhubungan dengan banyak entitas B	Satu Dosen ↔ Banyak Mahasiswa
+Many to Many (M:N)	Banyak entitas A berhubungan dengan banyak entitas B	Banyak Mahasiswa ↔ Banyak Mata Kuliah</li>
+
+
+    
+      
     </ul>
   </section>
 
