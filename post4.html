@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Normalisasi</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Normalisasi</h1>
+    <nav>
+      <a href="../index.html">Beranda</a>
+      <a href="materi.html">Materi</a>
+      <a href="tugas.html">Tugas</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Konsep Normalisasi</h2>
+    <p>Normalisasi adalah proses pengorganisasian data untuk mengurangi redundansi dan meningkatkan integritas data.</p>
+
+    <h3>Tahapan Normalisasi:</h3>
+    <ul>
+      <li>1NF — Data tidak boleh bernilai ganda dalam satu kolom.</li>
+      <li>2NF — Semua kolom bergantung pada primary key.</li>
+      <li>3NF — Tidak ada ketergantungan antar kolom non-key.</li>
+    </ul>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Sandy — Basis Data
+  </footer>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
 
