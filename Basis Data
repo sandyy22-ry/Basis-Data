@@ -1,3 +1,67 @@
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif;}
+body {
+  background: linear-gradient(180deg,#4f46e5 0%,#7e22ce 100%);
+  color: #fff;
+  line-height: 1.6;
+}
+header {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+header h1 {
+  font-size: 22px;
+  color: #fff;
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: 500;
+}
+nav a:hover {
+  color: #c084fc;
+}
+section {
+  padding: 80px 20px;
+  max-width: 800px;
+  margin: auto;
+}
+.hero {
+  text-align: center;
+  margin-top: 40px;
+}
+.hero h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.hero p {
+  color: #e9d5ff;
+}
+.about {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 30px;
+}
+.about h3 {
+  border-left: 5px solid #c084fc;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+footer {
+  text-align: center;
+  padding: 15px;
+  background: rgba(0,0,0,0.2);
+  color: #ccc;
+  font-size: 14px;
+}
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
