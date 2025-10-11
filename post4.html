@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Normalisasi</title>
+  <title>Apa itu Physical Model</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body { background: linear-gradient(180deg, #4f46e5, #7e22ce); color: #fff; line-height: 1.6; }
@@ -28,16 +28,22 @@
   </header>
 
   <section class="hero">
-    <h2>Normalisasi</h2>
-    <p>Normalisasi adalah proses merancang tabel untuk mengurangi duplikasi dan menjaga konsistensi data.</p>
+    <h2>Apa itu Physical Model</h2>
+    <p>Apa itu Physical Model</p>
   </section>
 
   <section class="about">
-    <h3>Tahapan Normalisasi</h3>
+    <h3>Apa itu Physical Model</h3>
     <ul>
-      <li><b>1NF:</b> Setiap kolom berisi nilai tunggal.</li>
-      <li><b>2NF:</b> Tidak ada ketergantungan parsial terhadap primary key.</li>
-      <li><b>3NF:</b> Tidak ada ketergantungan antar atribut non-key.</li>
+      <li> Physical model adalah tahap perancangan basis data yang berfokus pada bagaimana data benar-benar disimpan di dalam sistem database (DBMS). Jika conceptual dan logical model masih membahas data secara abstrak atau logis, physical model sudah masuk ke aspek teknis implementasi.</li>
+      <li>Beberapa hal yang biasanya dijelaskan dalam physical model antara lain:
+
+Nama tabel yang spesifik sesuai DBMS yang digunakan
+Tipe data yang tepat untuk setiap kolom (misalnya INT, VARCHAR, DATE, dll.)
+Panjang field atau batas karakter
+Penentuan primary key, foreign key, indeks, dan constraint
+Pembagian storage atau partisi jika diperlukan</li>
+      <li>Physical model juga memperhatikan performa, keamanan, dan efisiensi penyimpanan. Misalnya, memilih tipe data terkecil yang sesuai agar penyimpanan tidak boros, atau menambahkan indeks agar pencarian data lebih cepat. Singkatnya, physical model adalah rancangan akhir yang siap dieksekusi oleh DBMS untuk membentuk struktur basis data secara nyata. Ini adalah tahap paling konkret dari seluruh proses desain database.</li>
     </ul>
   </section>
 
