@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DDL & DML</title>
+  <title>Entitas, Atribut, dan Relasi dalam ERDL</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body { background: linear-gradient(180deg, #4f46e5, #7e22ce); color: #fff; line-height: 1.6; }
@@ -29,20 +29,92 @@
   </header>
 
   <section class="hero">
-    <h2>DDL & DML</h2>
-    <p>DDL dan DML adalah dua kelompok perintah utama SQL yang digunakan dalam pengelolaan data dan struktur basis data.</p>
+    <h2>Entitas, Atribut, dan Relasi dalam ERDL</h2>
+    <p>Entitas, Atribut, dan Relasi dalam ERD</p>
   </section>
 
   <section class="about">
-    <h3>Perbedaan DDL dan DML</h3>
+    <h3>Entitas, Atribut, dan Relasi dalam ERD</h3>
     <ul>
       <li>
-        <b>DDL (Data Definition Language):</b> digunakan untuk membuat dan mengubah struktur tabel.
-        <br>Contoh: <code>CREATE TABLE</code>, <code>ALTER TABLE</code>, <code>DROP TABLE</code>.
+       <b> Primary Key
+
+Primary Key adalah atribut atau kombinasi atribut yang berfungsi sebagai pengenal unik setiap baris data dalam tabel. Artinya, tidak boleh ada dua baris yang memiliki nilai Primary Key yang sama, dan nilai ini tidak boleh kosong (NULL). Misalnya, pada tabel mahasiswa, kolom nim dapat dijadikan Primary Key karena setiap mahasiswa memiliki nomor induk yang unik.</b>
+        <b>Foreign Key adalah atribut yang digunakan untuk menghubungkan satu tabel dengan tabel lain. Foreign Key mengambil nilai dari Primary Key di tabel lain agar hubungan antar data tetap konsisten. Tujuannya adalah menjaga integritas referensial dalam database.</b>
+        <b>Candidate Key adalah atribut atau kombinasi atribut yang berpotensi menjadi Primary Key karena memiliki nilai yang unik dan tidak bernilai NULL. Dalam satu tabel bisa terdapat lebih dari satu Candidate Key, namun hanya satu yang akan dipilih sebagai Primary Key.</b>
+        <b>Tentu, mari kita terapkan konsep Entitas, Atribut, dan Relasi dalam konteks sistem sekolah, lengkap dengan representasi tabel logikal dan penjelasannya.
+
+Ini adalah tiga komponen fundamental dalam Diagram Hubungan Entitas (ERD).
+
+1. Entitas (Entity) 🏫
+Entitas adalah objek utama yang datanya perlu disimpan. Dalam sistem sekolah, entitas yang paling penting adalah:
+
+Entitas	Penjelasan	Akan menjadi...
+SISWA	Semua data mengenai peserta didik.	Tabel SISWA
+GURU	Semua data mengenai tenaga pengajar.	Tabel GURU
+MATA_PELAJARAN	Semua data mengenai subjek yang diajarkan.	Tabel MATA_PELAJARAN
+KELAS	Semua data mengenai ruangan atau kelompok belajar.	Tabel KELAS</b>
+        <b>Atribut (Attribute) 🔖
+Atribut adalah properti atau ciri-ciri yang mendeskripsikan sebuah entitas. Atribut inilah yang akan menjadi kolom dalam tabel.
+
+➡️ Tabel SISWA
+Atribut	Keterangan	Jenis Atribut
+NIS	Nomor Induk Siswa (Wajib unik)	Primary Key (Kunci Utama)
+Nama_Siswa	Nama lengkap siswa.	Atribut Deskriptif
+Tgl_Lahir	Tanggal lahir siswa.	Atribut Deskriptif
+Alamat	Alamat tempat tinggal siswa.	Atribut Deskriptif
+ID_Kelas	Kode Kelas tempat siswa terdaftar.	Foreign Key (Kunci Tamu)
+
+Export to Sheets
+➡️ Tabel GURU
+Atribut	Keterangan	Jenis Atribut
+NIP	Nomor Induk Pegawai (Wajib unik)	Primary Key (Kunci Utama)
+Nama_Guru	Nama lengkap guru.	Atribut Deskriptif
+No_HP	Nomor telepon guru.	Atribut Deskriptif
+Bidang_Keahlian	Mata pelajaran spesialisasi guru.	Atribut Deskriptif
+
+Export to Sheets
+➡️ Tabel MATA_PELAJARAN
+Atribut	Keterangan	Jenis Atribut
+Kode_Mapel	Kode unik mata pelajaran.	Primary Key (Kunci Utama)
+Nama_Mapel	Nama mata pelajaran (misalnya, "Matematika").	Atribut Deskriptif
+SKS	Satuan Kredit Semester (Beban mata pelajaran).	Atribut Deskriptif
+
+Export to Sheets
+➡️ Tabel KELAS
+Atribut	Keterangan	Jenis Atribut
+ID_Kelas	Kode unik untuk setiap kelas (misalnya, "X-A", "XI-IPA").	Primary Key (Kunci Utama)
+Nama_Kelas	Nama kelas.	Atribut Deskriptif
+Kapasitas	Jumlah maksimal siswa yang ditampung.	Atribut Deskriptif
+NIP_Wali_Kelas	NIP guru yang menjabat sebagai wali kelas.	Foreign Key (Kunci Tamu)</b>
+        <b>Relasi (Relationship) 🔗
+Relasi mendefinisikan hubungan logis antar entitas (tabel) dan seberapa banyak (kardinalitas) entitas tersebut terhubung.
+
+A. Kardinalitas (Derajat Hubungan)
+Ada tiga jenis utama relasi dalam sistem sekolah:
+
+Relasi	Keterangan	Penjelasan Logis
+One-to-One (1:1)	Guru mengelola Kelas	Satu GURU hanya mengelola satu KELAS sebagai wali kelas, dan satu KELAS hanya memiliki satu GURU wali.
+One-to-Many (1:M)	Kelas terdiri dari Siswa	Satu KELAS dapat diisi oleh banyak SISWA, tetapi satu SISWA hanya terdaftar di satu KELAS.
+Many-to-Many (M:N)	Siswa mengambil Mata Pelajaran	Banyak SISWA mengambil banyak MATA_PELAJARAN, dan satu MATA_PELAJARAN diambil oleh banyak SISWA.
+
+Export to Sheets
+B. Pemecahan Relasi M:N (Menghasilkan Tabel Baru)
+Dalam database, relasi Many-to-Many (M:N) tidak dapat diimplementasikan secara langsung. Kita harus memecahnya menjadi dua relasi 1:M dengan membuat tabel penghubung baru (sering disebut Tabel Transaksi/Junction).
+
+Relasi M:N: SISWA mengambil MATA_PELAJARAN
+
+Tabel Penghubung: Dibuat tabel baru bernama NILAI.
+
+➡️ Tabel NILAI (Tabel Penghubung)
+Atribut	Keterangan	Jenis Atribut
+ID_Nilai	Kunci utama unik untuk setiap entri nilai.	Primary Key (Kunci Utama)
+NIS	Kode Siswa (dari tabel SISWA).	Foreign Key
+Kode_Mapel	Kode Mata Pelajaran (dari tabel MATA_PELAJARAN).	Foreign Key
+Nilai_Akhir	Nilai yang didapat siswa untuk mata pelajaran tersebut.	Atribut Deskriptif</b>
       </li>
       <li>
-        <b>DML (Data Manipulation Language):</b> digunakan untuk memanipulasi isi tabel.
-        <br>Contoh: <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.
+       
       </li>
     </ul>
   </section>
