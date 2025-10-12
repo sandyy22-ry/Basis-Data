@@ -1,124 +1,132 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entitas, Atribut, dan Relasi dalam ERDL</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background: linear-gradient(180deg, #4f46e5, #7e22ce); color: #fff; line-height: 1.6; }
-    header { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-    header h1 { font-size: 22px; }
-    nav a { color: #fff; text-decoration: none; margin-left: 20px; transition: .3s; }
-    nav a:hover { color: #c084fc; }
-    section { max-width: 800px; margin: auto; padding: 70px 20px; }
-    .hero { text-align: center; margin-bottom: 30px; }
-    .hero h2 { font-size: 32px; margin-bottom: 10px; }
-    .hero p { color: #e9d5ff; }
-    .about { background: rgba(255,255,255,0.15); border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-    .about h3 { border-left: 5px solid #c084fc; padding-left: 12px; margin-bottom: 15px; font-size: 22px; }
-    .about li { margin-bottom: 10px; }
-    code { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 5px; }
-    footer { text-align: center; padding: 15px; background: rgba(0,0,0,0.25); color: #ccc; margin-top: 40px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 7: Primary Key, Foreign Key, dan Candidate Key</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>Basis Data</h1>
-    <nav><a href="index.html">Beranda</a></nav>
-  </header>
+    <header>
+        <div class="container">
+            <h1>Basis Data: Kunci Integritas</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="post1.html">Materi</a></li>
+                    <li><a href="#footer">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <section class="hero">
-    <h2>Entitas, Atribut, dan Relasi dalam ERDL</h2>
-    <p>Entitas, Atribut, dan Relasi dalam ERD</p>
-  </section>
+    <main class="container">
+        <article class="post">
+            <h2>Post 7: Primary Key, Foreign Key, dan Candidate Key</h2>
+            <p class="post-meta">Diposting pada: 16 Oktober 2025 | Kategori: Integritas Data</p>
 
-  <section class="about">
-    <h3>Entitas, Atribut, dan Relasi dalam ERD</h3>
-    <ul>
-      <li>
-       <b> Primary Key
+            <p>Konsep **Kunci (Key)** adalah inti dari Model Data Relasional. Kunci berfungsi untuk memastikan integritas data dan mendefinisikan hubungan antar tabel. Tanpa kunci yang tepat, database akan menjadi tidak konsisten.</p>
+            
+            <hr>
 
-Primary Key adalah atribut atau kombinasi atribut yang berfungsi sebagai pengenal unik setiap baris data dalam tabel. Artinya, tidak boleh ada dua baris yang memiliki nilai Primary Key yang sama, dan nilai ini tidak boleh kosong (NULL). Misalnya, pada tabel mahasiswa, kolom nim dapat dijadikan Primary Key karena setiap mahasiswa memiliki nomor induk yang unik.</b>
-        <b>Foreign Key adalah atribut yang digunakan untuk menghubungkan satu tabel dengan tabel lain. Foreign Key mengambil nilai dari Primary Key di tabel lain agar hubungan antar data tetap konsisten. Tujuannya adalah menjaga integritas referensial dalam database.</b>
-        <b>Candidate Key adalah atribut atau kombinasi atribut yang berpotensi menjadi Primary Key karena memiliki nilai yang unik dan tidak bernilai NULL. Dalam satu tabel bisa terdapat lebih dari satu Candidate Key, namun hanya satu yang akan dipilih sebagai Primary Key.</b>
-        <b>Tentu, mari kita terapkan konsep Entitas, Atribut, dan Relasi dalam konteks sistem sekolah, lengkap dengan representasi tabel logikal dan penjelasannya.
+            <section>
+                <h3>1. Candidate Key (Kunci Kandidat)</h3>
+                <p>**Candidate Key** adalah satu atau sekumpulan atribut minimum yang dapat mengidentifikasi secara unik sebuah baris dalam tabel. Setiap Kunci Kandidat harus **unik** dan **minimal**.</p>
 
-Ini adalah tiga komponen fundamental dalam Diagram Hubungan Entitas (ERD).
+                <h4>Primary Key (Kunci Utama)</h4>
+                <p>**Primary Key (PK)** adalah Kunci Kandidat yang **dipilih** oleh perancang database untuk menjadi identitas unik utama sebuah tabel. PK tidak boleh memiliki nilai **NULL** (Integritas Entitas) dan harus unik.</p>
+                
+                <p class="example-text">
+                    **Contoh (Tabel GURU):** Candidate Keys bisa berupa **NIP** atau **(Nama_Guru + Tgl_Lahir)**. Kita memilih **NIP** sebagai Primary Key karena lebih pendek dan stabil.
+                </p>
+                
+                <h4>Ilustrasi DDL Primary Key</h4>
+                <pre><code>-- NIP dijadikan Primary Key untuk identitas unik Guru
+CREATE TABLE Guru (
+    NIP CHAR(10) PRIMARY KEY,
+    Nama_Guru VARCHAR(100) NOT NULL,
+    Tgl_Lahir DATE 
+);</code></pre>
+            </section>
 
-1. Entitas (Entity) 🏫
-Entitas adalah objek utama yang datanya perlu disimpan. Dalam sistem sekolah, entitas yang paling penting adalah:
+            <hr>
 
-Entitas	Penjelasan	Akan menjadi...
-SISWA	Semua data mengenai peserta didik.	Tabel SISWA
-GURU	Semua data mengenai tenaga pengajar.	Tabel GURU
-MATA_PELAJARAN	Semua data mengenai subjek yang diajarkan.	Tabel MATA_PELAJARAN
-KELAS	Semua data mengenai ruangan atau kelompok belajar.	Tabel KELAS</b>
-        <b>Atribut (Attribute) 🔖
-Atribut adalah properti atau ciri-ciri yang mendeskripsikan sebuah entitas. Atribut inilah yang akan menjadi kolom dalam tabel.
+            <section>
+                <h3>2. Foreign Key (Kunci Tamu)</h3>
+                <p>**Foreign Key (FK)** adalah atribut pada satu tabel (tabel anak) yang nilainya merujuk pada **Primary Key** di tabel lain (tabel induk). FK adalah jembatan yang menciptakan relasi dan menjamin **Integritas Referensial**.</p>
+                
+                <p class="example-text">
+                    **Contoh (Tabel SISWA merujuk ke KELAS):** Atribut **ID_Kelas** di tabel SISWA adalah Foreign Key yang merujuk pada Primary Key **ID_Kelas** di tabel KELAS.
+                </p>
+                
+                <h4>Ilustrasi DDL Foreign Key</h4>
+                <pre><code>-- Tabel Siswa (Anak)
+CREATE TABLE Siswa (
+    NIS CHAR(10) PRIMARY KEY,
+    Nama_Siswa VARCHAR(100),
+    ID_Kelas CHAR(5),
+    -- Definisi Foreign Key (FK) yang merujuk ke tabel KELAS
+    FOREIGN KEY (ID_Kelas) REFERENCES Kelas(ID_Kelas)
+);</code></pre>
+            </section>
 
-➡️ Tabel SISWA
-Atribut	Keterangan	Jenis Atribut
-NIS	Nomor Induk Siswa (Wajib unik)	Primary Key (Kunci Utama)
-Nama_Siswa	Nama lengkap siswa.	Atribut Deskriptif
-Tgl_Lahir	Tanggal lahir siswa.	Atribut Deskriptif
-Alamat	Alamat tempat tinggal siswa.	Atribut Deskriptif
-ID_Kelas	Kode Kelas tempat siswa terdaftar.	Foreign Key (Kunci Tamu)
+            <hr>
 
-Export to Sheets
-➡️ Tabel GURU
-Atribut	Keterangan	Jenis Atribut
-NIP	Nomor Induk Pegawai (Wajib unik)	Primary Key (Kunci Utama)
-Nama_Guru	Nama lengkap guru.	Atribut Deskriptif
-No_HP	Nomor telepon guru.	Atribut Deskriptif
-Bidang_Keahlian	Mata pelajaran spesialisasi guru.	Atribut Deskriptif
+            <section>
+                <h3>3. Tabel Ilustrasi Data (Sistem Sekolah)</h3>
+                <p>Perhatikan bagaimana Foreign Key (FK) mengikat tabel SISWA dan KELAS.</p>
 
-Export to Sheets
-➡️ Tabel MATA_PELAJARAN
-Atribut	Keterangan	Jenis Atribut
-Kode_Mapel	Kode unik mata pelajaran.	Primary Key (Kunci Utama)
-Nama_Mapel	Nama mata pelajaran (misalnya, "Matematika").	Atribut Deskriptif
-SKS	Satuan Kredit Semester (Beban mata pelajaran).	Atribut Deskriptif
+                <h4>Tabel KELAS (Tabel Induk)</h4>
+                <table border="1" width="100%">
+                    <thead>
+                        <tr>
+                            <th>ID_Kelas **(PK)**</th>
+                            <th>Nama_Kelas</th>
+                            <th>NIP_Wali_Kelas (FK ke Guru)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>X-A</td><td>Kelas X IPA A</td><td>1001</td></tr>
+                        <tr><td>X-B</td><td>Kelas X IPS B</td><td>1002</td></tr>
+                        <tr><td>XI-A</td><td>Kelas XI IPA A</td><td>1003</td></tr>
+                    </tbody>
+                </table>
 
-Export to Sheets
-➡️ Tabel KELAS
-Atribut	Keterangan	Jenis Atribut
-ID_Kelas	Kode unik untuk setiap kelas (misalnya, "X-A", "XI-IPA").	Primary Key (Kunci Utama)
-Nama_Kelas	Nama kelas.	Atribut Deskriptif
-Kapasitas	Jumlah maksimal siswa yang ditampung.	Atribut Deskriptif
-NIP_Wali_Kelas	NIP guru yang menjabat sebagai wali kelas.	Foreign Key (Kunci Tamu)</b>
-        <b>Relasi (Relationship) 🔗
-Relasi mendefinisikan hubungan logis antar entitas (tabel) dan seberapa banyak (kardinalitas) entitas tersebut terhubung.
+                <h4>Tabel SISWA (Tabel Anak)</h4>
+                <table border="1" width="100%">
+                    <thead>
+                        <tr>
+                            <th>NIS **(PK)**</th>
+                            <th>Nama_Siswa</th>
+                            <th>ID_Kelas **(FK ke Kelas)**</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2025001</td><td>Aldi Pratama</td><td>X-A</td></tr>
+                        <tr><td>2025002</td><td>Bunga Citra</td><td>X-A</td></tr>
+                        <tr><td>2025003</td><td>Rudi Herman</td><td>XI-A</td></tr>
+                        <tr><td>2025004</td><td>Sinta Dewi</td><td>X-B</td></tr>
+                    </tbody>
+                </table>
+                <p>Karena <code>ID_Kelas</code> pada tabel SISWA adalah FK, Anda tidak bisa memasukkan siswa ke kelas 'XII-C' jika 'XII-C' belum ada di tabel KELAS.</p>
+            </section>
 
-A. Kardinalitas (Derajat Hubungan)
-Ada tiga jenis utama relasi dalam sistem sekolah:
+            <hr>
 
-Relasi	Keterangan	Penjelasan Logis
-One-to-One (1:1)	Guru mengelola Kelas	Satu GURU hanya mengelola satu KELAS sebagai wali kelas, dan satu KELAS hanya memiliki satu GURU wali.
-One-to-Many (1:M)	Kelas terdiri dari Siswa	Satu KELAS dapat diisi oleh banyak SISWA, tetapi satu SISWA hanya terdaftar di satu KELAS.
-Many-to-Many (M:N)	Siswa mengambil Mata Pelajaran	Banyak SISWA mengambil banyak MATA_PELAJARAN, dan satu MATA_PELAJARAN diambil oleh banyak SISWA.
+            <div class="navigation">
+                <a href="post6.html" class="prev-post">← Post Sebelumnya: DDL & DML</a>
+                <a href="post8.html" class="next-post">Post Selanjutnya: Normalisasi →</a>
+            </div>
 
-Export to Sheets
-B. Pemecahan Relasi M:N (Menghasilkan Tabel Baru)
-Dalam database, relasi Many-to-Many (M:N) tidak dapat diimplementasikan secara langsung. Kita harus memecahnya menjadi dua relasi 1:M dengan membuat tabel penghubung baru (sering disebut Tabel Transaksi/Junction).
+        </article>
+    </main>
 
-Relasi M:N: SISWA mengambil MATA_PELAJARAN
-
-Tabel Penghubung: Dibuat tabel baru bernama NILAI.
-
-➡️ Tabel NILAI (Tabel Penghubung)
-Atribut	Keterangan	Jenis Atribut
-ID_Nilai	Kunci utama unik untuk setiap entri nilai.	Primary Key (Kunci Utama)
-NIS	Kode Siswa (dari tabel SISWA).	Foreign Key
-Kode_Mapel	Kode Mata Pelajaran (dari tabel MATA_PELAJARAN).	Foreign Key
-Nilai_Akhir	Nilai yang didapat siswa untuk mata pelajaran tersebut.	Atribut Deskriptif</b>
-      </li>
-      <li>
-       
-      </li>
-    </ul>
-  </section>
-
-  <footer>&copy; 2025 Sandy — Website Basis Data</footer>
+    <footer id="footer">
+        <div class="container">
+            <p>&copy; 2025 Materi Basis Data - [Nama Anda]</p>
+            <p>Kontak: [Email Anda]</p>
+        </div>
+    </footer>
 </body>
 </html>
