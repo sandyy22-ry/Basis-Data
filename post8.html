@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Normalisasi Database (1NF, 2NF, 3NF)</title>
+    <title>Post 8: Entitas, Atribut, dan Relasi dalam ERD</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: linear-gradient(180deg, #4f46e5, #7e22ce); color: #fff; line-height: 1.6; }
@@ -22,12 +22,13 @@
         .about li { margin-bottom: 15px; }
         code { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 5px; }
 
-        /* Style Tambahan untuk Tabel agar sesuai dengan gaya Poppins */
+        /* Style untuk Tabel */
         table { width: 100%; border-collapse: collapse; margin: 20px 0; background: rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; }
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.3); font-size: 14px;}
         th { background: #4f46e5; font-weight: 600; color: #fff; }
-        tr:nth-child(even) { background: rgba(0,0,0,0.1); } /* Alternating row color */
+        tr:nth-child(even) { background: rgba(0,0,0,0.1); }
         tr:last-child td { border-bottom: none; }
+        .note { padding: 10px; background: rgba(255,255,0,0.15); border-left: 5px solid #ffcc00; margin-top: 15px; font-size: 14px; }
 
     </style>
 </head>
@@ -38,92 +39,90 @@
     </header>
 
     <section class="hero">
-        <h2>Post 8: Normalisasi Database (1NF, 2NF, 3NF)</h2>
-        <p>Proses merapikan desain tabel untuk menghindari redundansi data.</p>
+        <h2>Post 8: Entitas, Atribut, dan Relasi dalam ERD</h2>
+        <p>Memodelkan struktur database menggunakan Diagram Hubungan Entitas (ERD).</p>
     </section>
 
     <section class="about">
-        <h3>Normalisasi Database</h3>
-        <p>Normalisasi adalah proses mendekomposisi (memecah) tabel untuk mengeliminasi anomali data (Insertion, Deletion, Update) dan memastikan integritas referensial. Kami akan fokus pada tiga bentuk normal utama.</p>
+        <h3>Komponen Dasar ERD</h3>
+        <p>Diagram Hubungan Entitas (ERD) adalah alat visual untuk merancang model data konseptual database. Ada tiga komponen utama yang wajib dipahami.</p>
         
         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.4); margin: 30px 0;">
 
-        <h3>1. First Normal Form (1NF)</h3>
-        <p>Sebuah tabel berada dalam 1NF jika **setiap kolom (atribut) memiliki nilai atomik (tunggal)** dan **tidak ada grup pengulangan (repeating groups)**.</p>
-        <ul>
-            <li>**Prinsip:** Satu kolom hanya boleh berisi satu jenis informasi, dan setiap sel hanya berisi satu nilai.</li>
-        </ul>
-
-        <h3>2. Second Normal Form (2NF)</h3>
-        <p>Sebuah tabel berada dalam 2NF jika sudah 1NF **dan** semua atribut non-kunci harus bergantung **sepenuhnya** pada Primary Key (PK) secara keseluruhan.</p>
-        <ul>
-            <li>**Masalah yang diatasi:** Ketergantungan parsial (Partial Dependency). Jika PK-nya gabungan, atribut non-kunci tidak boleh hanya bergantung pada sebagian PK.</li>
-            <li>**Solusi:** Pindahkan atribut yang bergantung sebagian ke tabel baru.</li>
-        </ul>
-
-        <h3>3. Third Normal Form (3NF)</h3>
-        <p>Sebuah tabel berada dalam 3NF jika sudah 2NF **dan** tidak ada **ketergantungan transitif** (Transitive Dependency).</p>
-        <ul>
-            <li>**Masalah yang diatasi:** Ketergantungan transitif, yaitu ketika atribut non-kunci bergantung pada atribut non-kunci lainnya.</li>
-            <li>**Solusi:** Pindahkan atribut yang memiliki ketergantungan transitif ke tabel baru.</li>
-        </ul>
-
-        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.4); margin: 30px 0;">
-
-        <h3>Ilustrasi Tabel Normalisasi ke 3NF</h3>
-        <p>Kita mulai dari tabel tunggal yang bermasalah dan memecahnya menjadi tabel-tabel terpisah yang efisien.</p>
+        <h3>1. Entitas (Entity) ◻️</h3>
+        <p>Entitas adalah objek, kejadian, atau konsep yang nyata dan perlu disimpan datanya. Entitas direpresentasikan sebagai **Persegi Panjang**.</p>
         
-        <h4>Tabel Awal (Belum Normal)</h4>
-        <p>Tabel ini memiliki redundansi: Nama_Siswa dan Alamat diulang untuk setiap mata pelajaran.</p>
+        <h4>Contoh Entitas Sistem Sekolah:</h4>
         <table>
             <thead>
                 <tr>
-                    <th>NIS</th>
-                    <th>Nama_Siswa</th>
-                    <th>Alamat</th>
-                    <th>Kode_Mapel</th>
-                    <th>Nilai</th>
+                    <th>Entitas</th>
+                    <th>Penjelasan</th>
+                    <th>Simbol ERD</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>2025001</td><td>Aldi</td><td>Jakarta</td><td>M-01</td><td>90</td></tr>
-                <tr><td>2025001</td><td>Aldi</td><td>Jakarta</td><td>B-02</td><td>85</td></tr>
-                <tr><td>2025002</td><td>Bunga</td><td>Bogor</td><td>M-01</td><td>88</td></tr>
+                <tr><td>SISWA</td><td>Peserta didik di sekolah.</td><td>Persegi Panjang</td></tr>
+                <tr><td>GURU</td><td>Tenaga pengajar.</td><td>Persegi Panjang</td></tr>
+                <tr><td>MATA_PELAJARAN</td><td>Subjek yang diajarkan.</td><td>Persegi Panjang</td></tr>
             </tbody>
         </table>
 
-        <h4>Hasil Normalisasi (Mendekati 3NF)</h4>
-        <p>Setelah dipecah, data disimpan hanya sekali (mengeliminasi anomali Update dan Insertion).</p>
-
-        <h4>Tabel SISWA (Hanya Data Siswa)</h4>
-        <table>
-            <thead>
-                <tr><th>NIS (PK)</th><th>Nama_Siswa</th><th>Alamat</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>2025001</td><td>Aldi</td><td>Jakarta</td></tr>
-                <tr><td>2025002</td><td>Bunga</td><td>Bogor</td></tr>
-            </tbody>
-        </table>
-
-        <h4>Tabel NILAI (Tabel Transaksi)</h4>
-        <p>Tabel ini berisi FK yang merujuk ke tabel SISWA dan MATA_PELAJARAN.</p>
-        <table>
-            <thead>
-                <tr><th>ID_Nilai (PK)</th><th>NIS (FK)</th><th>Kode_Mapel (FK)</th><th>Nilai</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>1</td><td>2025001</td><td>M-01</td><td>90</td></tr>
-                <tr><td>2</td><td>2025001</td><td>B-02</td><td>85</td></tr>
-                <tr><td>3</td><td>2025002</td><td>M-01</td><td>88</td></tr>
-            </tbody>
-        </table>
-        
         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.4); margin: 30px 0;">
 
-        <nav style="display: flex; justify-content: space-between; margin-top: 20px;">
+        <h3>2. Atribut (Attribute) 🔵</h3>
+        <p>Atribut adalah properti atau ciri-ciri yang mendeskripsikan sebuah Entitas. Atribut akan menjadi **kolom** dalam tabel database.</p>
+        <ul>
+            <li>**Primary Key:** Atribut unik yang mengidentifikasi baris data (misalnya: <code>NIS</code> pada Entitas SISWA).</li>
+            <li>**Atribut Deskriptif:** Memberikan rincian data (misalnya: <code>Nama_Siswa</code>, <code>Tgl_Lahir</code>).</li>
+        </ul>
+
+        <h4>Contoh Atribut Entitas SISWA:</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Atribut</th>
+                    <th>Keterangan</th>
+                    <th>Jenis</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>NIS</td><td>Nomor Induk Siswa</td><td>Primary Key</td></tr>
+                <tr><td>Nama_Siswa</td><td>Nama lengkap</td><td>Deskriptif</td></tr>
+                <tr><td>ID_Kelas</td><td>Kode kelas terdaftar</td><td>Foreign Key</td></tr>
+            </tbody>
+        </table>
+
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.4); margin: 30px 0;">
+
+        <h3>3. Relasi (Relationship) 🔸</h3>
+        <p>Relasi adalah hubungan atau asosiasi yang bermakna antara dua atau lebih entitas. Relasi direpresentasikan sebagai **Belah Ketupat**.</p>
+
+        <h4>Kardinalitas (Derajat Hubungan)</h4>
+        <p>Kardinalitas menentukan berapa banyak instansi dari satu entitas yang dapat dihubungkan dengan instansi entitas lain.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Relasi</th>
+                    <th>Notasi</th>
+                    <th>Contoh (Sistem Sekolah)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Satu ke Satu</td><td>1:1</td><td>Satu GURU **memimpin** satu Departemen.</td></tr>
+                <tr><td>Satu ke Banyak</td><td>1:M</td><td>Satu KELAS **dihadiri** banyak SISWA.</td></tr>
+                <tr><td>Banyak ke Banyak</td><td>M:N</td><td>Banyak SISWA **mengambil** banyak MATA_PELAJARAN.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="note">
+            **Penting:** Relasi M:N (Banyak ke Banyak) harus dipecah menjadi dua relasi 1:M dengan menambahkan entitas perantara/transaksi (misalnya, tabel NILAI) saat mengimplementasikan ke database.
+        </div>
+
+        <nav style="display: flex; justify-content: space-between; margin-top: 40px;">
             <a href="post7.html" style="color: #c084fc; text-decoration: none;">&larr; Post Sebelumnya: Konsep Kunci</a>
-            <a href="post9.html" style="color: #c084fc; text-decoration: none;">Post Selanjutnya: DCL & TCL &rarr;</a>
+            <a href="post9.html" style="color: #c084fc; text-decoration: none;">Post Selanjutnya: Normalisasi Database &rarr;</a>
         </nav>
 
     </section>
