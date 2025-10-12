@@ -3,149 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 8: Normalisasi Database (1NF, 2NF, 3NF)</title>
-    <link rel="stylesheet" href="style.css"> 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Normalisasi Database (1NF, 2NF, 3NF)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(180deg, #4f46e5, #7e22ce); color: #fff; line-height: 1.6; }
+        header { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        header h1 { font-size: 22px; }
+        nav a { color: #fff; text-decoration: none; margin-left: 20px; transition: .3s; }
+        nav a:hover { color: #c084fc; }
+        section { max-width: 800px; margin: auto; padding: 70px 20px; }
+        .hero { text-align: center; margin-bottom: 30px; }
+        .hero h2 { font-size: 32px; margin-bottom: 10px; }
+        .hero p { color: #e9d5ff; }
+        .about { background: rgba(255,255,255,0.15); border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .about h3 { border-left: 5px solid #c084fc; padding-left: 12px; margin-bottom: 25px; font-size: 22px; }
+        .about p { margin-bottom: 15px; }
+        .about ul { list-style: disc; margin-left: 20px; margin-bottom: 20px; }
+        .about li { margin-bottom: 15px; }
+        code { background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 5px; }
+
+        /* Style Tambahan untuk Tabel agar sesuai dengan gaya Poppins */
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.3); font-size: 14px;}
+        th { background: #4f46e5; font-weight: 600; color: #fff; }
+        tr:nth-child(even) { background: rgba(0,0,0,0.1); } /* Alternating row color */
+        tr:last-child td { border-bottom: none; }
+
+    </style>
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Basis Data: Desain Terbaik</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Beranda</a></li>
-                    <li><a href="post1.html">Materi</a></li>
-                    <li><a href="#footer">Kontak</a></li>
-                </ul>
-            </nav>
-        </div>
+        <h1>Basis Data</h1>
+        <nav><a href="index.html">Beranda</a></nav>
     </header>
 
-    <main class="container">
-        <article class="post">
-            <h2>Post 8: Normalisasi Database (1NF, 2NF, 3NF)</h2>
-            <p class="post-meta">Diposting pada: 17 Oktober 2025 | Kategori: Desain DB</p>
+    <section class="hero">
+        <h2>Post 8: Normalisasi Database (1NF, 2NF, 3NF)</h2>
+        <p>Proses merapikan desain tabel untuk menghindari redundansi data.</p>
+    </section>
 
-            <p>Normalisasi adalah proses merapikan skema database dengan mengorganisasi kolom dan tabel untuk meminimalkan redundansi (pengulangan data) dan ketergantungan data. Tujuannya adalah memastikan integritas dan efisiensi penyimpanan data.</p>
-            
-            <hr>
+    <section class="about">
+        <h3>Normalisasi Database</h3>
+        <p>Normalisasi adalah proses mendekomposisi (memecah) tabel untuk mengeliminasi anomali data (Insertion, Deletion, Update) dan memastikan integritas referensial. Kami akan fokus pada tiga bentuk normal utama.</p>
+        
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.4); margin: 30px 0;">
 
-            <section>
-                <h3>1. Masalah Tanpa Normalisasi</h3>
-                <p>Jika tabel tidak dinormalisasi, akan timbul anomali (masalah) saat operasi DML:</p>
-                <ul>
-                    <li>**Anomali Penyisipan (Insertion Anomaly):** Sulit memasukkan data baru karena harus memasukkan data lain yang tidak relevan.</li>
-                    <li>**Anomali Penghapusan (Deletion Anomaly):** Menghapus satu baris data dapat menghilangkan data penting lainnya.</li>
-                    <li>**Anomali Pembaruan (Update Anomaly):** Harus mengubah data di banyak tempat (redundansi), yang berisiko inkonsistensi.</li>
-                </ul>
-            </section>
+        <h3>1. First Normal Form (1NF)</h3>
+        <p>Sebuah tabel berada dalam 1NF jika **setiap kolom (atribut) memiliki nilai atomik (tunggal)** dan **tidak ada grup pengulangan (repeating groups)**.</p>
+        <ul>
+            <li>**Prinsip:** Satu kolom hanya boleh berisi satu jenis informasi, dan setiap sel hanya berisi satu nilai.</li>
+        </ul>
 
-            <hr>
+        <h3>2. Second Normal Form (2NF)</h3>
+        <p>Sebuah tabel berada dalam 2NF jika sudah 1NF **dan** semua atribut non-kunci harus bergantung **sepenuhnya** pada Primary Key (PK) secara keseluruhan.</p>
+        <ul>
+            <li>**Masalah yang diatasi:** Ketergantungan parsial (Partial Dependency). Jika PK-nya gabungan, atribut non-kunci tidak boleh hanya bergantung pada sebagian PK.</li>
+            <li>**Solusi:** Pindahkan atribut yang bergantung sebagian ke tabel baru.</li>
+        </ul>
 
-            <section>
-                <h3>2. Tahapan Normalisasi</h3>
-                <p>Ada beberapa bentuk normal, namun 1NF, 2NF, dan 3NF adalah yang paling sering digunakan.</p>
+        <h3>3. Third Normal Form (3NF)</h3>
+        <p>Sebuah tabel berada dalam 3NF jika sudah 2NF **dan** tidak ada **ketergantungan transitif** (Transitive Dependency).</p>
+        <ul>
+            <li>**Masalah yang diatasi:** Ketergantungan transitif, yaitu ketika atribut non-kunci bergantung pada atribut non-kunci lainnya.</li>
+            <li>**Solusi:** Pindahkan atribut yang memiliki ketergantungan transitif ke tabel baru.</li>
+        </ul>
 
-                <h4>2.1. First Normal Form (1NF)</h4>
-                <p>Sebuah tabel dikatakan 1NF jika:</p>
-                <ul>
-                    <li>Semua atribut memiliki nilai **atomik** (tidak dapat dibagi lagi).</li>
-                    <li>Tidak ada grup pengulangan (tiap baris harus unik).</li>
-                </ul>
-                <p class="example-text">
-                    **Contoh: Tabel tidak 1NF** jika kolom "No_Telepon" berisi beberapa nomor telepon sekaligus dalam satu *field*. Solusinya: Pisahkan menjadi baris/kolom terpisah.
-                </p>
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.4); margin: 30px 0;">
 
-                <h4>2.2. Second Normal Form (2NF)</h4>
-                <p>Sebuah tabel dikatakan 2NF jika sudah 1NF **dan** semua atribut non-kunci harus bergantung **sepenuhnya** pada Primary Key (PK) secara keseluruhan.</p>
-                <p class="example-text">
-                    **Masalah:** Jika PK-nya adalah kunci gabungan (Composite Key), dan ada atribut yang hanya bergantung pada **sebagian** PK. Solusinya: Pindahkan atribut tersebut ke tabel baru dengan PK yang sesuai.
-                </p>
+        <h3>Ilustrasi Tabel Normalisasi ke 3NF</h3>
+        <p>Kita mulai dari tabel tunggal yang bermasalah dan memecahnya menjadi tabel-tabel terpisah yang efisien.</p>
+        
+        <h4>Tabel Awal (Belum Normal)</h4>
+        <p>Tabel ini memiliki redundansi: Nama_Siswa dan Alamat diulang untuk setiap mata pelajaran.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>NIS</th>
+                    <th>Nama_Siswa</th>
+                    <th>Alamat</th>
+                    <th>Kode_Mapel</th>
+                    <th>Nilai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>2025001</td><td>Aldi</td><td>Jakarta</td><td>M-01</td><td>90</td></tr>
+                <tr><td>2025001</td><td>Aldi</td><td>Jakarta</td><td>B-02</td><td>85</td></tr>
+                <tr><td>2025002</td><td>Bunga</td><td>Bogor</td><td>M-01</td><td>88</td></tr>
+            </tbody>
+        </table>
 
-                <h4>2.3. Third Normal Form (3NF)</h4>
-                <p>Sebuah tabel dikatakan 3NF jika sudah 2NF **dan** tidak ada ketergantungan transitif. Ketergantungan transitif terjadi ketika atribut non-kunci bergantung pada atribut non-kunci lainnya.</p>
-                <p class="example-text">
-                    **Masalah:** Jika kolom "Nama_Kelas" bergantung pada kolom "ID_Kelas", yang mana "ID_Kelas" sendiri bukan Primary Key tabel saat ini. Solusinya: Pindahkan ke tabel baru (Tabel KELAS).
-                </p>
-            </section>
+        <h4>Hasil Normalisasi (Mendekati 3NF)</h4>
+        <p>Setelah dipecah, data disimpan hanya sekali (mengeliminasi anomali Update dan Insertion).</p>
 
-            <hr>
+        <h4>Tabel SISWA (Hanya Data Siswa)</h4>
+        <table>
+            <thead>
+                <tr><th>NIS (PK)</th><th>Nama_Siswa</th><th>Alamat</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>2025001</td><td>Aldi</td><td>Jakarta</td></tr>
+                <tr><td>2025002</td><td>Bunga</td><td>Bogor</td></tr>
+            </tbody>
+        </table>
 
-            <section>
-                <h3>3. Ilustrasi Tahapan Normalisasi (Contoh Data Nilai)</h3>
-                
-                <h4>Tabel Awal (Tidak Normal)</h4>
-                <p>Tabel ini belum rapi (banyak redundansi data Siswa dan Guru di setiap baris nilai).</p>
-                <table border="1" width="100%">
-                    <thead>
-                        <tr>
-                            <th>NIS</th>
-                            <th>Nama_Siswa</th>
-                            <th>Nama_Kelas</th>
-                            <th>Kode_Mapel</th>
-                            <th>Nama_Mapel</th>
-                            <th>Nilai</th>
-                            <th>NIP_Guru</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>2025001</td><td>Aldi</td><td>X-A</td><td>M-01</td><td>MTK</td><td>90</td><td>1001</td></tr>
-                        <tr><td>2025001</td><td>Aldi</td><td>X-A</td><td>B-02</td><td>B. Indo</td><td>85</td><td>1002</td></tr>
-                        <tr><td>2025002</td><td>Bunga</td><td>X-A</td><td>M-01</td><td>MTK</td><td>88</td><td>1001</td></tr>
-                        </tbody>
-                </table>
+        <h4>Tabel NILAI (Tabel Transaksi)</h4>
+        <p>Tabel ini berisi FK yang merujuk ke tabel SISWA dan MATA_PELAJARAN.</p>
+        <table>
+            <thead>
+                <tr><th>ID_Nilai (PK)</th><th>NIS (FK)</th><th>Kode_Mapel (FK)</th><th>Nilai</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>2025001</td><td>M-01</td><td>90</td></tr>
+                <tr><td>2</td><td>2025001</td><td>B-02</td><td>85</td></tr>
+                <tr><td>3</td><td>2025002</td><td>M-01</td><td>88</td></tr>
+            </tbody>
+        </table>
+        
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.4); margin: 30px 0;">
 
-                <h4>Hasil Normalisasi ke 3NF (Tabel yang Terpisah)</h4>
-                <p>Setelah mencapai 3NF, data akan terbagi menjadi tabel logis dan dihubungkan oleh Foreign Key, sehingga data siswa dan kelas tidak perlu diulang setiap kali ada nilai baru.</p>
+        <nav style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <a href="post7.html" style="color: #c084fc; text-decoration: none;">&larr; Post Sebelumnya: Konsep Kunci</a>
+            <a href="post9.html" style="color: #c084fc; text-decoration: none;">Post Selanjutnya: DCL & TCL &rarr;</a>
+        </nav>
 
-                <h4>Tabel SISWA (Entitas Utama)</h4>
-                <table border="1" width="100%">
-                    <thead>
-                        <tr><th>NIS (PK)</th><th>Nama_Siswa</th><th>ID_Kelas (FK)</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>2025001</td><td>Aldi</td><td>X-A</td></tr>
-                        <tr><td>2025002</td><td>Bunga</td><td>X-A</td></tr>
-                    </tbody>
-                </table>
+    </section>
 
-                <h4>Tabel KELAS</h4>
-                <table border="1" width="100%">
-                    <thead>
-                        <tr><th>ID_Kelas (PK)</th><th>Nama_Kelas</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>X-A</td><td>Kelas X IPA A</td></tr>
-                    </tbody>
-                </table>
-                
-                <h4>Tabel NILAI (Tabel Transaksi/Junction)</h4>
-                <table border="1" width="100%">
-                    <thead>
-                        <tr><th>ID_Nilai (PK)</th><th>NIS (FK)</th><th>Kode_Mapel (FK)</th><th>Nilai</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>1</td><td>2025001</td><td>M-01</td><td>90</td></tr>
-                        <tr><td>2</td><td>2025001</td><td>B-02</td><td>85</td></tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <hr>
-
-            <div class="navigation">
-                <a href="post7.html" class="prev-post">← Post Sebelumnya: Konsep Kunci</a>
-                <a href="post9.html" class="next-post">Post Selanjutnya: DCL & TCL →</a>
-            </div>
-
-        </article>
-    </main>
-
-    <footer id="footer">
-        <div class="container">
-            <p>&copy; 2025 Materi Basis Data - [Nama Anda]</p>
-            <p>Kontak: [Email Anda]</p>
-        </div>
-    </footer>
+    <footer>&copy; 2025 Sandy — Website Basis Data</footer>
 </body>
 </html>
