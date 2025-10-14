@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ERD: 5 Kasus Intersection (Associative Entity)</title>
+  <style>
+    :root{
+      --bg:#f7fbff;
+      --card:#ffffff;
+      --muted:#666;
+      --accent:#0b5fff;
+      --border:#e3e8ff;
+      --shadow: 0 6px 18px rgba(11,95,255,0.06);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#0b1a2b;
+      line-height:1.45;
+      padding:28px;
+    }
+
+    header{
+      margin-bottom:18px;
+    }
+    h1{
+      margin:0 0 6px 0;
+      font-size:1.6rem;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+    }
+
+    main{
+      display:grid;
+      gap:18px;
+      max-width:1100px;
+      margin-top:18px;
+    }
+
+    .case{
+      background:var(--card);
+      border-radius:12px;
+      padding:16px;
+      box-shadow:var(--shadow);
+      border:1px solid var(--border);
+    }
+
+    .case h2{
+      margin:0 0 6px 0;
+      font-size:1.05rem;
+      color:var(--accent);
+    }
+
+    .desc{
+      margin:6px 0 12px 0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    .diagram-wrap{
+      width:100%;
+      overflow:auto;
+      padding:6px 0 0 0;
+    }
+
+    .erd{ width:100%; height:220px; display:block; }
+
+    .entity{
+      fill:#fff;
+      stroke:#cdd9ff;
+      stroke-width:1;
+      rx:8;
+    }
+    .entity.assoc{
+      fill:#fbfcff;
+      stroke:#bfd0ff;
+      stroke-dasharray:4 2;
+    }
+    .entity-title{
+      font-size:14px;
+      font-weight:700;
+      fill:#0b2a66;
+    }
+    .attr{
+      font-size:12px;
+      fill:#1a2a44;
+    }
+    .pk{
+      font-weight:700;
+      text-decoration:underline;
+    }
+    .rel{
+      stroke:#99b0ff;
+      stroke-width:3;
+      stroke-linecap:round;
+    }
+    .card{
+      font-size:12px;
+      fill:#0b2a66;
+    }
+
+    footer{
+      padding:12px 6px;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ERD: 5 Kasus Intersection (Associative Entity)</h1>
+    <p class="lead">Contoh penggunaan intersection entity (tabel penghubung many-to-many) dalam berbagai kasus sistem basis data.</p>
+  </header>
+
+  <main>
+    <!-- Kasus 1 -->
+    <section class="case">
+      <h2>Kasus 1 — Student ↔ Course : <em>Enrollment</em></h2>
+      <p class="desc">Mahasiswa dan mata kuliah memiliki relasi many-to-many. Gunakan tabel <strong>Enrollment</strong> untuk menyimpan tanggal pendaftaran dan nilai.</p>
+      <div class="diagram-wrap">
+        <svg class="erd" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="200" height="80" class="entity"/>
+          <text x="30" y="44" class="entity-title">Student</text>
+          <text x="30" y="66" class="attr"><tspan class="pk">student_id (PK)</tspan></text>
+          <text x="30" y="86" class="attr">name</text>
+
+          <rect x="580" y="20" width="200" height="80" class="entity"/>
+          <text x="590" y="44" class="entity-title">Course</text>
+          <text x="590" y="66" class="attr"><tspan class="pk">course_id (PK)</tspan></text>
+          <text x="590" y="86" class="attr">title</text>
+
+          <rect x="280" y="110" width="240" height="90" class="entity assoc"/>
+          <text x="300" y="136" class="entity-title">Enrollment</text>
+          <text x="300" y="156" class="attr"><tspan class="pk">enroll_id (PK)</tspan></text>
+          <text x="300" y="176" class="attr">student_id (FK), course_id (FK)</text>
+          <text x="300" y="196" class="attr">enroll_date, grade</text>
+
+          <line x1="220" y1="60" x2="280" y2="155" class="rel"/>
+          <line x1="520" y1="155" x2="580" y2="60" class="rel"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Kasus 2 -->
+    <section class="case">
+      <h2>Kasus 2 — Doctor ↔ Patient : <em>Appointment</em></h2>
+      <p class="desc">Dokter dan pasien memiliki banyak pertemuan. Tabel <strong>Appointment</strong> mencatat waktu, ruangan, dan status kunjungan.</p>
+      <div class="diagram-wrap">
+        <svg class="erd" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="220" height="70" class="entity"/>
+          <text x="34" y="44" class="entity-title">Doctor</text>
+          <text x="34" y="66" class="attr"><tspan class="pk">doctor_id (PK)</tspan></text>
+
+          <rect x="560" y="20" width="220" height="70" class="entity"/>
+          <text x="574" y="44" class="entity-title">Patient</text>
+          <text x="574" y="66" class="attr"><tspan class="pk">patient_id (PK)</tspan></text>
+
+          <rect x="290" y="110" width="220" height="90" class="entity assoc"/>
+          <text x="305" y="136" class="entity-title">Appointment</text>
+          <text x="305" y="156" class="attr"><tspan class="pk">appointment_id (PK)</tspan></text>
+          <text x="305" y="176" class="attr">doctor_id (FK), patient_id (FK)</text>
+          <text x="305" y="196" class="attr">datetime, room, status</text>
+
+          <line x1="240" y1="55" x2="290" y2="155" class="rel"/>
+          <line x1="520" y1="155" x2="560" y2="55" class="rel"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Kasus 3 -->
+    <section class="case">
+      <h2>Kasus 3 — Order ↔ Product : <em>OrderLine</em></h2>
+      <p class="desc">Order bisa berisi banyak produk dan produk bisa muncul di banyak order. Tabel <strong>OrderLine</strong> mencatat quantity dan harga per item.</p>
+      <div class="diagram-wrap">
+        <svg class="erd" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="200" height="80" class="entity"/>
+          <text x="30" y="44" class="entity-title">Order</text>
+          <text x="30" y="66" class="attr"><tspan class="pk">order_id (PK)</tspan></text>
+
+          <rect x="580" y="20" width="200" height="80" class="entity"/>
+          <text x="590" y="44" class="entity-title">Product</text>
+          <text x="590" y="66" class="attr"><tspan class="pk">product_id (PK)</tspan></text>
+
+          <rect x="280" y="110" width="240" height="100" class="entity assoc"/>
+          <text x="300" y="136" class="entity-title">OrderLine</text>
+          <text x="300" y="156" class="attr"><tspan class="pk">orderline_id (PK)</tspan></text>
+          <text x="300" y="176" class="attr">order_id (FK), product_id (FK)</text>
+          <text x="300" y="196" class="attr">quantity, unit_price, subtotal</text>
+
+          <line x1="220" y1="60" x2="280" y2="155" class="rel"/>
+          <line x1="520" y1="155" x2="580" y2="60" class="rel"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Kasus 4 -->
+    <section class="case">
+      <h2>Kasus 4 — Author ↔ Book : <em>Authorship</em></h2>
+      <p class="desc">Buku dapat ditulis oleh banyak penulis, dan penulis dapat menulis banyak buku. Tabel <strong>Authorship</strong> menyimpan peran, urutan, dan kontribusi.</p>
+      <div class="diagram-wrap">
+        <svg class="erd" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="220" height="70" class="entity"/>
+          <text x="34" y="44" class="entity-title">Author</text>
+          <text x="34" y="66" class="attr"><tspan class="pk">author_id (PK)</tspan></text>
+
+          <rect x="560" y="20" width="220" height="70" class="entity"/>
+          <text x="574" y="44" class="entity-title">Book</text>
+          <text x="574" y="66" class="attr"><tspan class="pk">book_id (PK)</tspan></text>
+
+          <rect x="290" y="110" width="220" height="90" class="entity assoc"/>
+          <text x="305" y="136" class="entity-title">Authorship</text>
+          <text x="305" y="156" class="attr"><tspan class="pk">authorship_id (PK)</tspan></text>
+          <text x="305" y="176" class="attr">author_id (FK), book_id (FK)</text>
+          <text x="305" y="196" class="attr">role, contribution_pct, author_order</text>
+
+          <line x1="240" y1="55" x2="290" y2="155" class="rel"/>
+          <line x1="520" y1="155" x2="560" y2="55" class="rel"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Kasus 5 -->
+    <section class="case">
+      <h2>Kasus 5 — Employee ↔ Project : <em>Assignment</em></h2>
+      <p class="desc">Karyawan dapat terlibat di beberapa proyek, dan proyek memiliki banyak karyawan. Tabel <strong>Assignment</strong> mencatat tanggal mulai, peran, dan jam kerja.</p>
+      <div class="diagram-wrap">
+        <svg class="erd" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="220" height="70" class="entity"/>
+          <text x="34" y="44" class="entity-title">Employee</text>
+          <text x="34" y="66" class="attr"><tspan class="pk">employee_id (PK)</tspan></text>
+
+          <rect x="560" y="20" width="220" height="70" class="entity"/>
+          <text x="574" y="44" class="entity-title">Project</text>
+          <text x="574" y="66" class="attr"><tspan class="pk">project_id (PK)</tspan></text>
+
+          <rect x="290" y="110" width="220" height="90" class="entity assoc"/>
+          <text x="305" y="136" class="entity-title">Assignment</text>
+          <text x="305" y="156" class="attr"><tspan class="pk">assignment_id (PK)</tspan></text>
+          <text x="305" y="176" class="attr">employee_id (FK), project_id (FK)</text>
+          <text x="305" y="196" class="attr">start_date, end_date, role, hours</text>
+
+          <line x1="240" y1="55" x2="290" y2="155" class="rel"/>
+          <line x1="520" y1="155" x2="560" y2="55" class="rel"/>
+        </svg>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Intersection entity digunakan untuk memecah relasi many-to-many menjadi dua relasi one-to-many dengan entitas penghubung.</p>
+  </footer>
+</body>
+</html>
