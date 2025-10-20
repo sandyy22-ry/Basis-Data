@@ -1,25 +1,24 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Post 10 — Normalisasi & ERD: Penjelasan, Contoh, dan Kesimpulan</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Komponen DBMS</title>
   <style>
-    body{font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;line-height:1.6;color:#111;background:#fbfbfc;padding:24px}
-    header{max-width:900px;margin:0 auto 24px}
-    main{max-width:900px;margin:0 auto;background:#fff;padding:28px;border-radius:12px;box-shadow:0 6px 30px rgba(15,20,30,0.05)}
-    h1{font-size:1.6rem;margin-bottom:6px}
-    h2{font-size:1.2rem;margin-top:22px}
-    pre{background:#0f1724;color:#e6eef8;padding:14px;border-radius:8px;overflow:auto}
-    code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace}
-    .example{border-left:4px solid #3b82f6;padding:12px;margin:12px 0;border-radius:6px;background:#f1f8ff}
-    .bad{border-left-color:#ef4444;background:#fff6f6}
-    .good{border-left-color:#10b981;background:#f6fffb}
-    table{border-collapse:collapse;width:100%;margin-top:8px}
-    th,td{border:1px solid #e6e9ef;padding:8px;text-align:left}
-    footer{font-size:0.9rem;color:#6b7280;margin-top:18px}
-    .mermaid{background:#fff;padding:12px;border-radius:8px}
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: linear-gradient(180deg, #4f46e5, #7e22ce); color: #fff; line-height: 1.6; }
+    header { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    header h1 { font-size: 22px; }
+    nav a { color: #fff; text-decoration: none; margin-left: 20px; transition: .3s; }
+    nav a:hover { color: #c084fc; }
+    section { max-width: 800px; margin: auto; padding: 70px 20px; }
+    .hero { text-align: center; margin-bottom: 30px; }
+    .hero h2 { font-size: 32px; margin-bottom: 10px; }
+    .hero p { color: #e9d5ff; }
+    .about { background: rgba(255,255,255,0.15); border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .about h3 { border-left: 5px solid #c084fc; padding-left: 12px; margin-bottom: 15px; font-size: 22px; }
+    .about li { margin-bottom: 10px; }
+    footer { text-align: center; padding: 15px; background: rgba(0,0,0,0.25); color: #ccc; margin-top: 40px; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script>mermaid.initialize({startOnLoad:true});</script>
