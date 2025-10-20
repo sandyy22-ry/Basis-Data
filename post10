@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Post 10 — Normalisasi & ERD: Penjelasan, Contoh, dan Kesimpulan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css">
+  <style>
+    body{font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;line-height:1.6;color:#111;background:#fbfbfc;padding:24px}
+    header{max-width:900px;margin:0 auto 24px}
+    main{max-width:900px;margin:0 auto;background:#fff;padding:28px;border-radius:12px;box-shadow:0 6px 30px rgba(15,20,30,0.05)}
+    h1{font-size:1.6rem;margin-bottom:6px}
+    h2{font-size:1.2rem;margin-top:22px}
+    pre{background:#0f1724;color:#e6eef8;padding:14px;border-radius:8px;overflow:auto}
+    code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace}
+    .example{border-left:4px solid #3b82f6;padding:12px;margin:12px 0;border-radius:6px;background:#f1f8ff}
+    .bad{border-left-color:#ef4444;background:#fff6f6}
+    .good{border-left-color:#10b981;background:#f6fffb}
+    table{border-collapse:collapse;width:100%;margin-top:8px}
+    th,td{border:1px solid #e6e9ef;padding:8px;text-align:left}
+    footer{font-size:0.9rem;color:#6b7280;margin-top:18px}
+    .mermaid{background:#fff;padding:12px;border-radius:8px}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true});</script>
+</head>
+<body>
+  <header>
+    <h1>Normalisasi & ERD — Penjelasan lengkap, contoh benar & salah, fungsi, dan cara</h1>
+    <p>Post 10: Panduan ringkas namun lengkap untuk memahami normalisasi basis data dan merancang ERD (Entity Relationship Diagram). Cocok untuk tugas atau dokumentasi pada proyek Basis-Data.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Apa itu Normalisasi?</h2>
+      <p>Normalisasi adalah proses mengorganisir data di dalam basis data relasional untuk mengurangi redundansi dan menghindari anomali (insertion, update, delete). Tujuan utamanya adalah membagi data ke dalam tabel yang saling terkait sehingga setiap tabel hanya menyimpan satu jenis entitas atau hubungan.</p>
+
+      <h2>Mengapa Normalisasi Penting?</h2>
+      <ul>
+        <li>Mengurangi duplikasi data (hemat penyimpanan & konsistensi).</li>
+        <li>Mencegah anomali saat memasukkan, memperbarui, atau menghapus data.</li>
+        <li>Membuat struktur data lebih mudah dipelihara dan dimengerti.</li>
+        <li>Mendukung integritas referensial melalui kunci primer dan kunci asing.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Tahapan Normalisasi (singkat)</h2>
+      <ol>
+        <li><strong>1NF (First Normal Form)</strong>: Kolom harus atomik (nilai tunggal), dan setiap baris harus unik.</li>
+        <li><strong>2NF (Second Normal Form)</strong>: Sudah 1NF dan semua atribut non-kunci harus bergantung secara penuh pada kunci utama (hapus ketergantungan parsial).</li>
+        <li><strong>3NF (Third Normal Form)</strong>: Sudah 2NF dan tidak ada ketergantungan transitif (atribut non-kunci tidak tergantung pada atribut non-kunci lain).</li>
+        <li><strong>BCNF, 4NF, dst.</strong> digunakan pada kasus desain yang lebih ketat atau untuk menangani multi‑nilai dependency.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Contoh Kasus: Data Mahasiswa, MataKuliah, Dosen, dan Nilai</h2>
+
+      <p>Misalkan kita mulai dengan sebuah tabel tunggal yang menyimpan semua informasi:</p>
+
+      <div class="example bad">
+        <strong>Contoh tabel awal (tidak ternormalisasi):</strong>
+        <table>
+          <thead><tr><th>NIM</th><th>Nama</th><th>KodeMK</th><th>NamaMK</th><th>SKS</th><th>NIP</th><th>NamaDosen</th><th>Nilai</th></tr></thead>
+          <tbody>
+            <tr><td>21001</td><td>Budi</td><td>MK001</td><td>Basis Data</td><td>3</td><td>D001</td><td>Ibu Sinta</td><td>A</td></tr>
+            <tr><td>21001</td><td>Budi</td><td>MK002</td><td>Algoritma</td><td>2</td><td>D002</td><td>Pak Rudi</td><td>B</td></tr>
+            <tr><td>21002</td><td>Sari</td><td>MK001</td><td>Basis Data</td><td>3</td><td>D001</td><td>Ibu Sinta</td><td>B</td></tr>
+          </tbody>
+        </table>
+        <p><em>Masalah:</em> Pengulangan nama mahasiswa, dosen, dan mata kuliah. Susah mengubah nama dosen tanpa mengubah banyak baris.</p>
+      </div>
+
+      <h3>Transformasi ke 1NF → 2NF → 3NF</h3>
+      <p>Kita pisah ke tabel-tabel terpisah: <strong>Mahasiswa</strong>, <strong>MataKuliah</strong>, <strong>Dosen</strong>, dan <strong>Nilai</strong> (tabel relasi).</p>
+
+      <div class="example good">
+        <strong>Hasil normalisasi (3NF):</strong>
+        <ul>
+          <li><strong>Mahasiswa(NIM PK, Nama)</strong></li>
+          <li><strong>MataKuliah(KodeMK PK, NamaMK, SKS)</strong></li>
+          <li><strong>Dosen(NIP PK, NamaDosen)</strong></li>
+          <li><strong>Nilai(NIM FK, KodeMK FK, NIP FK, Nilai)</strong> — tabel relasi banyak-ke-banyak (Mahasiswa & MataKuliah) dilengkapi referensi ke Dosen (pengampu) jika perlu.</li>
+        </ul>
+      </div>
+
+      <h3>SQL untuk membuat tabel (contoh)</h3>
+      <pre><code>CREATE TABLE Mahasiswa (
+  NIM VARCHAR(10) PRIMARY KEY,
+  Nama VARCHAR(100)
+);
+
+CREATE TABLE Dosen (
+  NIP VARCHAR(10) PRIMARY KEY,
+  NamaDosen VARCHAR(100)
+);
+
+CREATE TABLE MataKuliah (
+  KodeMK VARCHAR(10) PRIMARY KEY,
+  NamaMK VARCHAR(100),
+  SKS INT
+);
+
+CREATE TABLE Nilai (
+  NIM VARCHAR(10),
+  KodeMK VARCHAR(10),
+  NIP VARCHAR(10),
+  Nilai CHAR(2),
+  PRIMARY KEY (NIM, KodeMK),
+  FOREIGN KEY (NIM) REFERENCES Mahasiswa(NIM),
+  FOREIGN KEY (KodeMK) REFERENCES MataKuliah(KodeMK),
+  FOREIGN KEY (NIP) REFERENCES Dosen(NIP)
+);</code></pre>
+    </section>
+
+    <section>
+      <h2>Contoh Penggunaan yang <em>Benar</em> dan <em>Salah</em></h2>
+
+      <div class="example bad">
+        <strong>Salah — menyimpan nama dosen di setiap baris nilai:</strong>
+        <p>Jika kita menyimpan <code>NamaDosen</code> pada tabel <code>Nilai</code>, perubahan nama dosen harus diubah pada semua baris. Ini menimbulkan anomali update dan duplikasi.</p>
+      </div>
+
+      <div class="example good">
+        <strong>Benar — menyimpan NamaDosen di tabel <code>Dosen</code> dan referensi NIP di <code>Nilai</code>:</strong>
+        <p>Perubahan nama dosen cukup dilakukan pada 1 baris di tabel <code>Dosen</code>. Data konsisten dan lebih efisien.</p>
+      </div>
+
+      <h3>Contoh Query (salah vs benar)</h3>
+      <p><strong>Salah (denormalized):</strong></p>
+      <pre><code>SELECT NIM, Nama, KodeMK, NamaMK, NamaDosen, Nilai
+FROM Nilai
+WHERE KodeMK = 'MK001';</code></pre>
+
+      <p><strong>Benar (ternormalisasi, JOIN):</strong></p>
+      <pre><code>SELECT n.NIM, m.Nama, mk.NamaMK, d.NamaDosen, n.Nilai
+FROM Nilai n
+JOIN Mahasiswa m ON n.NIM = m.NIM
+JOIN MataKuliah mk ON n.KodeMK = mk.KodeMK
+JOIN Dosen d ON n.NIP = d.NIP
+WHERE mk.KodeMK = 'MK001';</code></pre>
+
+      <p>Dengan struktur yang benar, query JOIN mengembalikan data lengkap tanpa duplikasi penyimpanan.</p>
+    </section>
+
+    <section>
+      <h2>ERD (Diagram)</h2>
+      <div class="mermaid">
+        %%{init: {"theme":"default"}}%%
+        erDiagram
+          MAHASISWA {
+            VARCHAR NIM PK
+            VARCHAR Nama
+          }
+          MATAKULIAH {
+            VARCHAR KodeMK PK
+            VARCHAR NamaMK
+            INT SKS
+          }
+          DOSEN {
+            VARCHAR NIP PK
+            VARCHAR NamaDosen
+          }
+          NILAI {
+            VARCHAR NIM FK
+            VARCHAR KodeMK FK
+            VARCHAR NIP FK
+            CHAR Nilai
+          }
+
+          MAHASISWA ||--o{ NILAI : "mengikuti"
+          MATAKULIAH ||--o{ NILAI : "diambil"
+          DOSEN ||--o{ NILAI : "mengampu"
+      </div>
+
+    </section>
+
+    <section>
+      <h2>Langkah Praktis Menyusun Normalisasi & ERD</h2>
+      <ol>
+        <li>Identifikasi semua atribut (kolom) yang ada di data awal.</li>
+        <li>Kelompokkan atribut menjadi entitas logis (contoh: Mahasiswa, MataKuliah, Dosen, Nilai).</li>
+        <li>Tentukan kunci primer untuk tiap entitas (mis. NIM, KodeMK, NIP).</li>
+        <li>Tentukan relasi dan arahannya (1:1, 1:N, N:M). Jika N:M gunakan tabel asosiasi (contoh: Nilai).</li>
+        <li>Periksa ketergantungan fungsional dan pastikan tidak ada ketergantungan parsial atau transitif (2NF & 3NF).</li>
+        <li>Terapkan constraint (PK, FK, unique, not null) dan buat indeks jika perlu untuk kinerja.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Fungsi & Manfaat dalam Aplikasi Nyata</h2>
+      <ul>
+        <li><strong>Integritas Data:</strong> FK menjaga relasi antar tabel tetap valid.</li>
+        <li><strong>Performansi:</strong> Query yang fokus (JOIN terarah) biasanya lebih efisien daripada memindai banyak duplikasi.</li>
+        <li><strong>Maintainability:</strong> Perubahan schema lebih mudah dan risiko bug berkurang.</li>
+        <li><strong>Skalabilitas:</strong> Struktur terorganisir mempermudah penambahan fitur (misal menyimpan riwayat atau versi).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Kesimpulan</h2>
+      <p>Normalisasi adalah praktik desain penting pada basis data relasional yang mengurangi redundansi dan meningkatkan konsistensi. Dengan memecah data ke tabel logis dan menerapkan kunci primer/kunci asing, kita mendapatkan struktur yang lebih aman terhadap anomali dan lebih mudah dipelihara. ERD adalah alat visual yang membantu merancang dan berkomunikasi struktur database — dari identifikasi entitas, atribut, hingga relasi. Untuk kebutuhan tertentu (misal optimalisasi baca pada sistem analitik), denormalisasi terkontrol bisa dipertimbangkan, tetapi harus dengan alasan teknis yang jelas.</p>
+    </section>
+
+    <footer>
+      <p>Post dibuat untuk materi <em>Basis-Data</em>. Kamu dapat mengedit atau menambahkan contoh kasus sesuai kebutuhan kelas atau proyek.</p>
+    </footer>
+  </main>
+</body>
+</html>
