@@ -61,14 +61,27 @@
       <div class="example bad">
         <strong>Contoh tabel awal (tidak ternormalisasi):</strong>
         
-        <table>
-          <thead><tr><th>NIM</th><th>Nama</th><th>KodeMK</th><th>NamaMK</th><th>SKS</th><th>NIP</th><th>NamaDosen</th><th>Nilai</th></tr></thead>
-          <tbody>
-            <tr><td>21001</td><td>Budi</td><td>MK001</td><td>Basis Data</td><td>3</td><td>D001</td><td>Ibu Sinta</td><td>A</td></tr>
-            <tr><td>21001</td><td>Budi</td><td>MK002</td><td>Algoritma</td><td>2</td><td>D002</td><td>Pak Rudi</td><td>B</td></tr>
-            <tr><td>21002</td><td>Sari</td><td>MK001</td><td>Basis Data</td><td>3</td><td>D001</td><td>Ibu Sinta</td><td>B</td></tr>
-          </tbody>
-        </table>
+       <table class="tabel-nilai">
+    <thead>
+      <tr>
+        <th>NIM</th>
+        <th>Nama</th>
+        <th>KodeMK</th>
+        <th>NamaMK</th>
+        <th>SKS</th>
+        <th>NIP</th>
+        <th>NamaDosen</th>
+        <th>Nilai</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>21001</td><td>Budi</td><td>MK001</td><td>Basis Data</td><td>3</td><td>D001</td><td>Ibu Sinta</td><td>A</td></tr>
+      <tr><td>21001</td><td>Budi</td><td>MK002</td><td>Algoritma</td><td>2</td><td>D002</td><td>Pak Rudi</td><td>B</td></tr>
+      <tr><td>21002</td><td>Sari</td><td>MK001</td><td>Basis Data</td><td>3</td><td>D001</td><td>Ibu Sinta</td><td>B</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>
         
         <p><em>Masalah:</em> Pengulangan nama mahasiswa, dosen, dan mata kuliah. Susah mengubah nama dosen tanpa mengubah banyak baris.</p>
       </div>
